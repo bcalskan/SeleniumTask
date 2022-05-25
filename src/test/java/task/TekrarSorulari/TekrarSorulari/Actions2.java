@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import utilities.TestBaseImplicitly;
 
 import java.util.Set;
@@ -18,8 +19,8 @@ public class Actions2 extends TestBaseImplicitly {
 
         //3- Cizili alan uzerinde sag click yapalim
         WebElement alan = driver.findElement(By.id("hot-spot"));
-//        Actions actions = new Actions(driver);
-//        actions.contextClick(alan).perform();
+        Actions actions = new Actions(driver);
+        actions.contextClick(alan).perform();
 
         //4- Alert’te cikan yazinin “You selected a context menu” oldugunu test edelim.
         String alertText = driver.switchTo().alert().getText();
