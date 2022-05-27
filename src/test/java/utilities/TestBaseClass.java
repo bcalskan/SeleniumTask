@@ -17,6 +17,8 @@ public abstract class TestBaseClass {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver.get("https://www.amazon.com");
+
     }
 
     @AfterClass
