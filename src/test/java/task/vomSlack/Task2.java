@@ -111,6 +111,10 @@ public class Task2 extends TestBaseClass {
         System.out.print(sepetTitleText);
 
         System.out.println("\n--------------------\n");
+
+
+
+
         String arr[] = sepetTitleText.split("\n");
         System.out.println(Arrays.toString(arr));
 
@@ -122,6 +126,7 @@ public class Task2 extends TestBaseClass {
                 sepetBebekFiyat = arr[i] + "." + arr[i + 1];
             }
         }
+        System.out.println(sepetBebekFiyat);
 
         Thread.sleep(2000);
 
