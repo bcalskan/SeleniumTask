@@ -10,6 +10,7 @@ import org.openqa.selenium.support.locators.RelativeLocator;
 import org.openqa.selenium.support.ui.Select;
 import utilities.TestBaseClass;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Task2 extends TestBaseClass {
@@ -29,7 +30,7 @@ public class Task2 extends TestBaseClass {
         for (WebElement each : selectOptions) {
             System.out.println(each.getText());
         }
-        System.out.println(selectOptions.size());
+        //System.out.println(selectOptions.size());
 
         //3- dropdown menude 28 eleman olduğunu doğrulayın
         int expectedSelectOptionNumber = 28;
@@ -37,7 +38,7 @@ public class Task2 extends TestBaseClass {
     }
 
     @Test
-    public void Test02() {
+    public void Test02() throws InterruptedException {
         //Test02
         //1- dropdown menuden elektronik bölümü seçin
         select.selectByVisibleText("Electronics");
@@ -58,6 +59,8 @@ public class Task2 extends TestBaseClass {
         //5- ürünün title'ni ve fiyatını variable’a assign edip ürünü sepete ekleyelim
         WebElement ikinciÜrünTitle = driver.findElement(By.xpath("//span[@class='a-size-large product-title-word-break']"));
         WebElement ikinciÜrünFiyat = driver.findElement(By.xpath("//span[@class='a-price a-text-price a-size-medium apexPriceToPay']"));
+        System.out.println("Ikinci ürün title : " + ikinciÜrünTitle.getText());
+        System.out.println("Ikinci ürün fiyat : " + ikinciÜrünFiyat.getText());
         WebElement addToCart = driver.findElement(By.xpath("//input[@id='add-to-cart-button']"));
         addToCart.click();
 
@@ -93,6 +96,9 @@ public class Task2 extends TestBaseClass {
         //6-title ve fiyat bilgilerini assign edelim ve ürünü sepete ekleyin
         WebElement bebekTitle = driver.findElement(By.xpath("//span[@class='a-size-large product-title-word-break']"));
         WebElement bebekFiyat = driver.findElement(By.xpath("//span[@class='a-price a-text-price a-size-medium apexPriceToPay']"));
+        String bebekTitleText = bebekTitle.getText();
+        String bebekFiyatText = bebekFiyat.getText();
+
         driver.findElement(By.xpath("//input[@id='add-to-cart-button']")).click();
 
         //Test 4
@@ -100,19 +106,28 @@ public class Task2 extends TestBaseClass {
         WebElement goToCart = driver.findElement(By.xpath("//span[@class='nav-cart-count nav-cart-1 nav-progressive-attribute nav-progressive-content']"));
         goToCart.click();
 
-        WebElement sepetBebekTitle = driver.findElement(By.xpath("(//span[@class='a-truncate-cut'])[1]"));
-        WebElement sepetBebekFiyat = driver.findElement(By.xpath("(//span[@class='a-price sc-product-price'])[1]"));
+        WebElement sepetBebekTitle = driver.findElement(By.xpath("//div[@data-item-index='1']"));
+        String sepetTitleText = sepetBebekTitle.getText();
+        System.out.print(sepetTitleText);
 
-        System.out.println(sepetBebekTitle.getText());
-        System.out.println(sepetBebekFiyat.getText());
+        System.out.println("\n--------------------\n");
+        String arr[] = sepetTitleText.split("\n");
+        System.out.println(Arrays.toString(arr));
 
-        WebElement sepetIphoneTitle = driver.findElement(By.xpath("(//span[@class='a-truncate-full a-offscreen'])[2]"));
-        WebElement sepetIphoneFiyat = driver.findElement(By.xpath("(//span[@class='a-price sc-product-price'])[2]"));
+        String sepetBebekFiyat = "";
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (!arr[i].contains("$")) {
+                continue;
+            } else {
+                sepetBebekFiyat = arr[i] + "." + arr[i + 1];
+            }
+        }
 
-        Assert.assertTrue(sepetBebekTitle.getText().equals(bebekTitle.getText()));
-        Assert.assertTrue(sepetBebekFiyat.getText().equals(bebekFiyat.getText()));
-        Assert.assertTrue(sepetIphoneTitle.getText().equals(ikinciÜrünTitle.getText()));
-        Assert.assertTrue(sepetIphoneFiyat.getText().equals(ikinciÜrünFiyat.getText()));
+        Thread.sleep(2000);
+
+
+
+
     }
 
 

@@ -23,6 +23,6 @@ public abstract class TestBaseClass {
 
     @AfterClass
     public static void after(){
-        //driver.quit();
+        driver.quit();
     }
 }
